@@ -3,9 +3,15 @@ from django.conf import settings
 
 
 def get_search_fieldname(model):
-    # If model has field 'title' then use that, else use the first
-    # CharField on model.
-    fieldname = ''
+    # If 'search_field' for the model is specified in settings, use it,
+    # else if the model has field 'title' then use that, else use
+    # the first CharField on model
+    try:
+        key = "%s" % model._meta
+        return getattr(settings, 'SIMPLE_AUTOCOMPLETE',
+                {})[key]['search_field']
+    except KeyError:
+        fieldname = ''
     try:
         model._meta.get_field_by_name('title')
         fieldname = 'title'
