@@ -13,7 +13,7 @@ def get_json(request, token):
     """Return matching results as JSON"""
     result = []
     searchtext = request.GET['q']
-    if len(searchtext) >= 3:
+    if len(searchtext) >= 1:
         pickled = _simple_autocomplete_queryset_cache.get(token, None)
         if pickled is not None:
             app_label, model_name, query = pickle.loads(pickled)
