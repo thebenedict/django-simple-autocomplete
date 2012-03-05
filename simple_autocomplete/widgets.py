@@ -89,7 +89,7 @@ class AutoCompleteWidget(Select):
             });
         },
         select: function(event, ui) { $('#id_%(name)s').val(ui.item.real_value); },
-        minLength: 3
+        minLength: 1
     });
 
     });
